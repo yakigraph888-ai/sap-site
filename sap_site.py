@@ -378,7 +378,7 @@ json_data = {
 import json
 
 with open(
-    "sap-site/public/npb_pitcher_stats_all.json",
+    "public/npb_pitcher_stats_all.json",
     "w",
     encoding="utf-8"
 ) as f:
