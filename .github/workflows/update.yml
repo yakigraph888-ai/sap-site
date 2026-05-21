@@ -2,8 +2,15 @@ name: Update NPB Stats
 
 on:
   schedule:
-    # JST 16:00〜25:30 を30分ごと
-    - cron: "0,30 7-16 * * *"
+    # JST 16:00〜25:00 を UTC に変換
+    # JST = UTC+9
+
+    # JST 16:00〜23:30
+    - cron: "0,30 7-14 * * *"
+
+    # JST 24:00〜25:00
+    - cron: "0,30 15 * * *"
+
   workflow_dispatch:
 
 permissions:
@@ -14,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Python
@@ -24,19 +31,23 @@ jobs:
 
       - name: Install packages
         run: |
-          pip install pandas requests beautifulsoup4 lxml html5lib
+          pip install requests pandas beautifulsoup4 lxml html5lib
+
+      - name: Check files
+        run: |
+          pwd
+          ls -la
 
       - name: Run scraper
-        run: |
-          python sap_site.py
+        run: python ./sap_site.py
 
-      - name: Commit JSON
+      - name: Commit & Push
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
           git add public/npb_pitcher_stats_all.json
 
-          git commit -m "Auto update stats" || echo "No changes"
+          git diff --cached --quiet || git commit -m "auto update"
 
           git push
