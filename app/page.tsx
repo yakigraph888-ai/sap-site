@@ -236,6 +236,43 @@ export default function Home() {
     )
     .slice(0, 3)
 
+    // ==========================================
+    // ソートマーク
+    // ==========================================
+    const renderSortIcon = (key: string) => {
+    
+      const isActive = sortKey === key
+    
+      return (
+    
+        <span className="inline-flex flex-col ml-1 leading-none">
+    
+          <span
+            className={
+              isActive && sortAsc
+                ? "text-white"
+                : "text-gray-500"
+            }
+          >
+            ▲
+          </span>
+    
+          <span
+            className={
+              isActive && !sortAsc
+                ? "text-blue-300"
+                : "text-gray-500"
+            }
+          >
+            ▼
+          </span>
+    
+        </span>
+    
+      )
+    
+    }
+
   // ==========================================
   // ヘッダークリック
   // ==========================================
@@ -367,132 +404,12 @@ export default function Home() {
 
       </div>
 
-        {/* スマホ用カード */}
-        <div className="md:hidden space-y-4 mb-6">
-        
-          {sortedPlayers.map((player, index) => (
-        
-            <div
-              key={index}
-              className="
-                rounded-2xl
-                bg-gray-900/80
-                border border-gray-700
-                p-4
-                shadow-lg
-              "
-            >
-        
-              {/* 名前 */}
-              <div className="flex justify-between items-center mb-3">
-        
-                <div>
-        
-                  <div className="text-lg font-bold text-white">
-                    {player["選手名"]}
-                  </div>
-        
-                  <div
-                    className={`
-                      inline-block
-                      px-2 py-1
-                      rounded-md
-                      text-xs
-                      mt-1
-                      ${teamColorClass(player["球団"])}
-                    `}
-                  >
-                    {player["球団"]}
-                  </div>
-        
-                </div>
-        
-                <div className="text-right">
-        
-                  <div className="text-xs text-gray-400">
-                    SAP
-                  </div>
-        
-                  <div className="text-2xl font-bold text-yellow-300">
-                    {formatSAP(
-                      Number(player["SAP"]),
-                      sapValues
-                    )}
-                  </div>
-        
-                </div>
-        
-              </div>
-        
-              {/* 基準達成 */}
-              <div className="mb-3 text-sm text-gray-300">
-        
-                基準達成数:
-                <span className="ml-2 text-green-400 font-bold">
-                  {player["基準達成数"]}/7
-                </span>
-        
-              </div>
-        
-              {/* 成績 */}
-              <div className="grid grid-cols-2 gap-2 text-sm">
-        
-                <div className="bg-gray-800 rounded-lg p-2">
-                  <div className="text-gray-400 text-xs">
-                    防御率
-                  </div>
-                  <div className="font-bold">
-                    {formatERA(player["防御率"])}
-                  </div>
-                </div>
-        
-                <div className="bg-gray-800 rounded-lg p-2">
-                  <div className="text-gray-400 text-xs">
-                    143換算勝利
-                  </div>
-                  <div className="font-bold">
-                    {formatOneDecimal(
-                      player["143試合換算勝利"]
-                    )}
-                  </div>
-                </div>
-        
-                <div className="bg-gray-800 rounded-lg p-2">
-                  <div className="text-gray-400 text-xs">
-                    143換算投球回
-                  </div>
-                  <div className="font-bold">
-                    {formatOneDecimal(
-                      player["143試合換算投球回"]
-                    )}
-                  </div>
-                </div>
-        
-                <div className="bg-gray-800 rounded-lg p-2">
-                  <div className="text-gray-400 text-xs">
-                    143換算奪三振
-                  </div>
-                  <div className="font-bold">
-                    {formatOneDecimal(
-                      player["143試合換算奪三振"]
-                    )}
-                  </div>
-                </div>
-        
-              </div>
-        
-            </div>
-        
-          ))}
-        
-        </div>
-
       {/* テーブル */}
       <p className="text-xs md:text-sm text-gray-400 mb-2">
         ※規定投球回到達者のみ
       </p>
       
-      <div className="hidden md:block overflow-x-auto">
+      <div className="overflow-x-auto">
 
         <div className="overflow-x-auto rounded-xl border border-gray-700 shadow-2xl">
 
@@ -555,7 +472,16 @@ export default function Home() {
                       transition
                     "
                   >
-                    {key.replace("143試合換算", "")}
+                    <div className="flex items-center justify-center gap-1">
+
+                      <span>
+                        {key.replace("143試合換算", "")}
+                      </span>
+                    
+                      {renderSortIcon(key)}
+                    
+                    </div>
+                    
                   </th>
 
                 ))}
