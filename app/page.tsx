@@ -176,6 +176,25 @@ export default function Home() {
   }
 
   // ==========================================
+  // SAP増減表示
+  // ==========================================
+  const formatSAPDiff = (value: number) => {
+
+    const absValue = Math.abs(value).toFixed(3)
+
+    if (value > 0) {
+      return `↑${removeZero(absValue)}`
+    }
+
+    if (value < 0) {
+      return `↓${removeZero(absValue)}`
+    }
+
+    return "-.000"
+
+  }
+
+  // ==========================================
   // SAP一覧
   // ==========================================
   const sapValues = players.map(
@@ -206,6 +225,16 @@ export default function Home() {
       : String(bValue).localeCompare(String(aValue), "ja")
 
   })
+
+  // ==========================================
+  // TOP3はSAP固定
+  // ==========================================
+  const top3Players = [...players]
+    .sort(
+      (a, b) =>
+        Number(b["SAP"]) - Number(a["SAP"])
+    )
+    .slice(0, 3)
 
   // ==========================================
   // ヘッダークリック
@@ -256,7 +285,7 @@ export default function Home() {
       {/* TOP3カード */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
 
-        {sortedPlayers.slice(0, 3).map((player, index) => {
+        {top3Players.map((player, index) => {
 
           const medals = ["🥇", "🥈", "🥉"]
 
@@ -299,6 +328,29 @@ export default function Home() {
                   )}
                 </div>
 
+                <div
+                  className={`
+                    mt-2
+                    text-sm
+                    font-bold
+                    ${
+                      Number(player["SAP増減"]) > 0
+                        ? "text-green-400"
+                        : Number(player["SAP増減"]) < 0
+                        ? "text-red-400"
+                        : "text-gray-400"
+                    }
+                  `}
+                >
+
+                  {
+                    formatSAPDiff(
+                      Number(player["SAP増減"])
+                    )
+                  }
+
+                </div>
+
               </div>
 
               <div className="mt-4 text-gray-300">
@@ -338,7 +390,7 @@ export default function Home() {
                   現在の成績
                 </th>
 
-                <th className="border border-gray-700 p-1.5 md:p-2" colSpan={10}>
+                <th className="border border-gray-700 p-1.5 md:p-2" colSpan={11}>
                   143試合換算
                 </th>
 
@@ -363,6 +415,7 @@ export default function Home() {
                   "143試合換算奪三振",
                   "基準達成数",
                   "沢村賞受賞回数",
+                  "SAP増減",
                   "SAP"
                 ].map((key) => (
 
@@ -474,6 +527,28 @@ export default function Home() {
 
                   <td className="border border-gray-700 p-1.5 md:p-2 text-center">
                     {player["沢村賞受賞回数"]}
+                  </td>
+
+                  <td
+                    className={`
+                      border border-gray-700
+                      p-1.5 md:p-2
+                      text-center
+                      font-bold
+                      ${
+                        Number(player["SAP増減"]) > 0
+                          ? "text-green-400"
+                          : Number(player["SAP増減"]) < 0
+                          ? "text-red-400"
+                          : "text-gray-400"
+                      }
+                    `}
+                  >
+                    {
+                      formatSAPDiff(
+                        Number(player["SAP増減"])
+                      )
+                    }
                   </td>
 
                   <td className="border border-gray-700 p-1.5 md:p-2 text-center font-bold text-yellow-300">
