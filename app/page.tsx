@@ -33,7 +33,7 @@ export default function Home() {
       : ""
 
   }
-  
+
   // ==========================================
   // 球団カラー
   // ==========================================
@@ -234,27 +234,27 @@ export default function Home() {
 
   return (
 
-    <main className="min-h-screen bg-gradient-to-b from-gray-950 to-blue-950 text-gray-100 p-6">
+    <main className="min-h-screen bg-gradient-to-b from-gray-950 to-blue-950 text-gray-100 p-3 md:p-6">
 
       {/* タイトル */}
-      <div className="mb-8">
+      <div className="mb-6 md:mb-8">
 
-        <h1 className="text-5xl font-extrabold tracking-tight text-white mb-2">
+        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-2 leading-tight">
           2026年沢村賞レース
         </h1>
 
-        <p className="text-blue-300 text-lg">
+        <p className="text-blue-300 text-sm md:text-lg">
           Sabermetric Award Probability
         </p>
 
-        <p className="text-gray-400 mt-2">
+        <p className="text-gray-400 mt-2 text-sm">
           最終更新: {updatedAt}
         </p>
 
       </div>
 
       {/* TOP3カード */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mb-6 md:mb-8">
 
         {sortedPlayers.slice(0, 3).map((player, index) => {
 
@@ -268,7 +268,7 @@ export default function Home() {
                 rounded-2xl
                 bg-gray-900/80
                 border border-gray-700
-                p-6
+                p-4 md:p-6
                 shadow-xl
                 backdrop-blur
               "
@@ -278,7 +278,7 @@ export default function Home() {
                 {medals[index]}
               </div>
 
-              <div className="text-2xl font-bold text-white">
+              <div className="text-xl md:text-2xl font-bold text-white">
                 {player["選手名"]}
               </div>
 
@@ -292,7 +292,7 @@ export default function Home() {
                   SAP
                 </div>
 
-                <div className="text-5xl font-extrabold text-yellow-300">
+                <div className="text-3xl md:text-5xl font-extrabold text-yellow-300">
                   {formatSAP(
                     Number(player["SAP"]),
                     sapValues
@@ -318,182 +318,186 @@ export default function Home() {
       {/* テーブル */}
       <div className="overflow-x-auto">
 
-        <table className="min-w-full border-collapse text-sm">
+        <div className="overflow-x-auto rounded-xl border border-gray-700 shadow-2xl">
 
-          <thead className="sticky top-0 bg-gray-900 z-10">
+          <table className="min-w-full border-collapse text-[11px] md:text-sm whitespace-nowrap">
 
-            <tr className="bg-gray-800">
+            <thead className="sticky top-0 bg-gray-900 z-20">
 
-              <th className="border border-gray-700 p-2" rowSpan={2}>
-                選手名
-              </th>
+              <tr className="bg-gray-800">
 
-              <th className="border border-gray-700 p-2" rowSpan={2}>
-                球団
-              </th>
-
-              <th className="border border-gray-700 p-2" colSpan={7}>
-                現在の成績
-              </th>
-
-              <th className="border border-gray-700 p-2" colSpan={10}>
-                143試合換算
-              </th>
-
-            </tr>
-
-            <tr className="bg-gray-700">
-
-              {[
-                "防御率",
-                "登板",
-                "完投",
-                "勝利",
-                "勝率",
-                "投球回",
-                "奪三振",
-                "143試合換算防御率",
-                "143試合換算登板",
-                "143試合換算完投",
-                "143試合換算勝利",
-                "143試合換算勝率",
-                "143試合換算投球回",
-                "143試合換算奪三振",
-                "基準達成数",
-                "沢村賞受賞回数",
-                "SAP"
-              ].map((key) => (
-
-                <th
-                  key={key}
-                  onClick={() => handleSort(key)}
-                  className="
-                    border
-                    border-gray-600
-                    p-2
-                    cursor-pointer
-                    hover:bg-blue-900
-                    transition
-                  "
-                >
-                  {key.replace("143試合換算", "")}
+                <th className="border border-gray-700 p-1.5 md:p-2 sticky left-0 bg-gray-800 z-30" rowSpan={2}>
+                  選手名
                 </th>
 
-              ))}
+                <th className="border border-gray-700 p-1.5 md:p-2" rowSpan={2}>
+                  球団
+                </th>
 
-            </tr>
+                <th className="border border-gray-700 p-1.5 md:p-2" colSpan={7}>
+                  現在の成績
+                </th>
 
-          </thead>
-
-          <tbody>
-
-            {sortedPlayers.map((player, index) => (
-
-              <tr
-                key={index}
-                className="hover:bg-gray-800"
-              >
-
-                <td className="border border-gray-700 p-2 font-bold">
-                  {player["選手名"]}
-                </td>
-
-                <td
-                  className={`
-                    border
-                    border-gray-700
-                    p-2
-                    text-center
-                    ${teamColorClass(player["球団"])}
-                  `}
-                >
-                  {player["球団"]}
-                </td>
-
-                <td className="border border-gray-700 p-2">
-                  {formatERA(player["防御率"])}
-                </td>
-
-                <td className="border border-gray-700 p-2">
-                  {player["登板"]}
-                </td>
-
-                <td className="border border-gray-700 p-2">
-                  {player["完投"]}
-                </td>
-
-                <td className="border border-gray-700 p-2">
-                  {player["勝利"]}
-                </td>
-
-                <td className="border border-gray-700 p-2">
-                  {formatWinPct(player["勝率"])}
-                </td>
-
-                <td className="border border-gray-700 p-2">
-                  {formatOneDecimal(player["投球回"])}
-                </td>
-
-                <td className="border border-gray-700 p-2">
-                  {player["奪三振"]}
-                </td>
-
-                <td className={`border border-gray-700 p-2 ${highlightClass(player["143試合換算防御率"] <= 2.5)}`}>
-                  {formatERA(player["143試合換算防御率"])}
-                </td>
-
-                <td className={`border border-gray-700 p-2 ${highlightClass(player["143試合換算登板"] >= 25)}`}>
-                  {formatOneDecimal(player["143試合換算登板"])}
-                </td>
-
-                <td className={`border border-gray-700 p-2 ${highlightClass(player["143試合換算完投"] >= 8)}`}>
-                  {formatOneDecimal(player["143試合換算完投"])}
-                </td>
-
-                <td className={`border border-gray-700 p-2 ${highlightClass(player["143試合換算勝利"] >= 15)}`}>
-                  {formatOneDecimal(player["143試合換算勝利"])}
-                </td>
-
-                <td className={`border border-gray-700 p-2 ${highlightClass(player["143試合換算勝率"] >= 0.6)}`}>
-                  {formatWinPct(player["143試合換算勝率"])}
-                </td>
-
-                <td className={`border border-gray-700 p-2 ${highlightClass(player["143試合換算投球回"] >= 180)}`}>
-                  {formatOneDecimal(player["143試合換算投球回"])}
-                </td>
-
-                <td className={`border border-gray-700 p-2 ${highlightClass(player["143試合換算奪三振"] >= 150)}`}>
-                  {formatOneDecimal(player["143試合換算奪三振"])}
-                </td>
-
-                <td className="border border-gray-700 p-2 text-center font-bold">
-                  {player["基準達成数"]}
-                </td>
-
-                <td className="border border-gray-700 p-2 text-center">
-                  {player["沢村賞受賞回数"]}
-                </td>
-
-                <td className="border border-gray-700 p-2 text-center font-bold text-yellow-300">
-                  {
-                    formatSAP(
-                      Number(player["SAP"]),
-                      sapValues
-                    )
-                  }
-                </td>
+                <th className="border border-gray-700 p-1.5 md:p-2" colSpan={10}>
+                  143試合換算
+                </th>
 
               </tr>
 
-            ))}
+              <tr className="bg-gray-700">
 
-          </tbody>
+                {[
+                  "防御率",
+                  "登板",
+                  "完投",
+                  "勝利",
+                  "勝率",
+                  "投球回",
+                  "奪三振",
+                  "143試合換算防御率",
+                  "143試合換算登板",
+                  "143試合換算完投",
+                  "143試合換算勝利",
+                  "143試合換算勝率",
+                  "143試合換算投球回",
+                  "143試合換算奪三振",
+                  "基準達成数",
+                  "沢村賞受賞回数",
+                  "SAP"
+                ].map((key) => (
 
-        </table>
+                  <th
+                    key={key}
+                    onClick={() => handleSort(key)}
+                    className="
+                      border
+                      border-gray-600
+                      p-1.5 md:p-2
+                      cursor-pointer
+                      hover:bg-blue-900
+                      transition
+                    "
+                  >
+                    {key.replace("143試合換算", "")}
+                  </th>
+
+                ))}
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              {sortedPlayers.map((player, index) => (
+
+                <tr
+                  key={index}
+                  className="hover:bg-gray-800"
+                >
+
+                  <td className="border border-gray-700 p-1.5 md:p-2 font-bold sticky left-0 bg-gray-950 z-10">
+                    {player["選手名"]}
+                  </td>
+
+                  <td
+                    className={`
+                      border
+                      border-gray-700
+                      p-1.5 md:p-2
+                      text-center
+                      ${teamColorClass(player["球団"])}
+                    `}
+                  >
+                    {player["球団"]}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2">
+                    {formatERA(player["防御率"])}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2">
+                    {player["登板"]}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2">
+                    {player["完投"]}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2">
+                    {player["勝利"]}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2">
+                    {formatWinPct(player["勝率"])}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2">
+                    {formatOneDecimal(player["投球回"])}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2">
+                    {player["奪三振"]}
+                  </td>
+
+                  <td className={`border border-gray-700 p-1.5 md:p-2 ${highlightClass(player["143試合換算防御率"] <= 2.5)}`}>
+                    {formatERA(player["143試合換算防御率"])}
+                  </td>
+
+                  <td className={`border border-gray-700 p-1.5 md:p-2 ${highlightClass(player["143試合換算登板"] >= 25)}`}>
+                    {formatOneDecimal(player["143試合換算登板"])}
+                  </td>
+
+                  <td className={`border border-gray-700 p-1.5 md:p-2 ${highlightClass(player["143試合換算完投"] >= 8)}`}>
+                    {formatOneDecimal(player["143試合換算完投"])}
+                  </td>
+
+                  <td className={`border border-gray-700 p-1.5 md:p-2 ${highlightClass(player["143試合換算勝利"] >= 15)}`}>
+                    {formatOneDecimal(player["143試合換算勝利"])}
+                  </td>
+
+                  <td className={`border border-gray-700 p-1.5 md:p-2 ${highlightClass(player["143試合換算勝率"] >= 0.6)}`}>
+                    {formatWinPct(player["143試合換算勝率"])}
+                  </td>
+
+                  <td className={`border border-gray-700 p-1.5 md:p-2 ${highlightClass(player["143試合換算投球回"] >= 180)}`}>
+                    {formatOneDecimal(player["143試合換算投球回"])}
+                  </td>
+
+                  <td className={`border border-gray-700 p-1.5 md:p-2 ${highlightClass(player["143試合換算奪三振"] >= 150)}`}>
+                    {formatOneDecimal(player["143試合換算奪三振"])}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2 text-center font-bold">
+                    {player["基準達成数"]}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2 text-center">
+                    {player["沢村賞受賞回数"]}
+                  </td>
+
+                  <td className="border border-gray-700 p-1.5 md:p-2 text-center font-bold text-yellow-300">
+                    {
+                      formatSAP(
+                        Number(player["SAP"]),
+                        sapValues
+                      )
+                    }
+                  </td>
+
+                </tr>
+
+              ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
 
       </div>
 
-      <p className="mt-6 text-sm text-gray-400">
+      <p className="mt-4 text-xs md:text-sm text-gray-400">
         更新日時: {updatedAt}
       </p>
 
