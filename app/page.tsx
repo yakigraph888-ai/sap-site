@@ -310,7 +310,7 @@ export default function Home() {
         </h1>
 
         <p className="text-blue-300 text-sm md:text-lg">
-          Sabermetric Award Probability
+          Sawamura Award Point
         </p>
 
         <p className="text-gray-400 mt-2 text-sm">
