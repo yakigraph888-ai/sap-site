@@ -176,25 +176,6 @@ export default function Home() {
   }
 
   // ==========================================
-  // SAP増減表示
-  // ==========================================
-  const formatSAPDiff = (value: number) => {
-
-    const absValue = Math.abs(value).toFixed(3)
-
-    if (value > 0) {
-      return `↑${removeZero(absValue)}`
-    }
-
-    if (value < 0) {
-      return `↓${removeZero(absValue)}`
-    }
-
-    return "-.000"
-
-  }
-
-  // ==========================================
   // SAP一覧
   // ==========================================
   const sapValues = players.map(
@@ -365,29 +346,6 @@ export default function Home() {
                   )}
                 </div>
 
-                <div
-                  className={`
-                    mt-2
-                    text-sm
-                    font-bold
-                    ${
-                      Number(player["SAP増減"]) > 0
-                        ? "text-green-400"
-                        : Number(player["SAP増減"]) < 0
-                        ? "text-red-400"
-                        : "text-gray-400"
-                    }
-                  `}
-                >
-
-                  {
-                    formatSAPDiff(
-                      Number(player["SAP増減"])
-                    )
-                  }
-
-                </div>
-
               </div>
 
               <div className="mt-4 text-gray-300">
@@ -431,7 +389,7 @@ export default function Home() {
                   現在の成績
                 </th>
 
-                <th className="border border-gray-700 p-1.5 md:p-2" colSpan={11}>
+                <th className="border border-gray-700 p-1.5 md:p-2" colSpan={10}>
                   143試合換算
                 </th>
 
@@ -456,7 +414,6 @@ export default function Home() {
                   "143試合換算奪三振",
                   "基準達成数",
                   "沢村賞受賞回数",
-                  "SAP増減",
                   "SAP"
                 ].map((key) => (
 
@@ -579,28 +536,6 @@ export default function Home() {
                     {player["沢村賞受賞回数"]}
                   </td>
 
-                  <td
-                    className={`
-                      border border-gray-700
-                      p-1.5 md:p-2
-                      text-center
-                      font-bold
-                      ${
-                        Number(player["SAP増減"]) > 0
-                          ? "text-green-400"
-                          : Number(player["SAP増減"]) < 0
-                          ? "text-red-400"
-                          : "text-gray-400"
-                      }
-                    `}
-                  >
-                    {
-                      formatSAPDiff(
-                        Number(player["SAP増減"])
-                      )
-                    }
-                  </td>
-
                   <td className="border border-gray-700 p-1.5 md:p-2 text-center font-bold text-yellow-300">
                     {
                       formatSAP(
@@ -686,6 +621,9 @@ export default function Home() {
               各年のSAP1位と沢村賞受賞者が一致しなかったのは
               2020年と2025年のみで、
               比較的高い精度を示しています。
+            </p>
+              
+            <p>
               ただし、完璧な指標ではないため、
               あくまで沢村賞レースを楽しむための参考指標のひとつとしてご覧ください。
             </p>

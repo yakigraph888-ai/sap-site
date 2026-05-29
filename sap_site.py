@@ -367,56 +367,6 @@ updated_at = datetime.now().strftime(
     "%Y-%m-%d %H:%M:%S"
 )
 
-import os
-
-# ==========================================
-# 前回SAP読み込み
-# ==========================================
-previous_sap_map = {}
-
-json_path = "public/npb_pitcher_stats_all.json"
-
-if os.path.exists(json_path):
-
-    try:
-
-        previous_df = pd.read_json(json_path)
-
-        if "players" in previous_df.columns:
-
-            previous_players = previous_df["players"][0]
-
-            for player in previous_players:
-
-                previous_sap_map[
-                    player["選手名"]
-                ] = player["SAP"]
-
-    except Exception as e:
-
-        print("前回JSON読み込み失敗:", e)
-
-# ==========================================
-# SAP増減
-# ==========================================
-sap_diff_list = []
-
-for _, row in all_df.iterrows():
-
-    current_sap = row["SAP"]
-
-    previous_sap = previous_sap_map.get(
-        row["選手名"],
-        current_sap
-    )
-
-    diff = current_sap - previous_sap
-
-    sap_diff_list.append(round(diff, 6))
-
-all_df["SAP増減"] = sap_diff_list
-
-
 # ==========================================
 # JSON保存
 # ==========================================
