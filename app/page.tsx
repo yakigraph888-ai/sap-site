@@ -621,6 +621,83 @@ export default function Home() {
         </div>
 
       </div>
+      
+      {/* SAPとは */}
+        <section
+          className="
+            mt-10
+            rounded-2xl
+            bg-gray-900/70
+            border border-gray-700
+            p-6
+            md:p-8
+            shadow-xl
+          "
+        >
+        
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            SAPとは
+          </h2>
+        
+          <div className="space-y-4 text-sm md:text-base text-gray-300 leading-8">
+        
+            <p>
+              <span className="font-bold text-yellow-300">
+                SAP（Sawamura Award Point）
+              </span>
+              は、そのシーズンの沢村賞受賞可能性を表す指標です。
+              過去の沢村賞受賞投手の成績をもとに、
+              AIの分析手法の一つである
+              「ロジスティック回帰」を用いて算出しています。
+            </p>
+        
+            <p>
+              2005〜2025年の沢村賞選考を学習データとし、
+              各投手の成績から
+              「沢村賞を受賞する確率」
+              を推定しています。
+            </p>
+        
+            <p>
+              分析には主に以下の項目を使用しています。
+            </p>
+        
+            <ul className="list-disc pl-6 space-y-1 text-gray-300">
+        
+              <li>防御率</li>
+              <li>勝利数</li>
+              <li>沢村賞選考基準7項目の達成数</li>
+              <li>過去の沢村賞受賞回数</li>
+        
+            </ul>
+        
+            <p>
+              SAPは
+              <span className="font-bold text-yellow-300 mx-1">
+                0〜1
+              </span>
+              の値を取り、
+              1に近いほど沢村賞受賞の可能性が高いことを表します。
+            </p>
+        
+            <p>
+              過去データで検証すると、
+              2019年（該当者なし）を除く
+              2005〜2025年のうち、
+              各年のSAP1位と沢村賞受賞者が一致しなかったのは
+              2020年と2025年のみでした。
+            </p>
+        
+            <p className="text-gray-400">
+              沢村賞は選考委員会によって決定されるため、
+              チーム成績やシーズン終盤の印象など、
+              数値化しづらい要素が影響することもあります。
+              SAPは沢村賞レースを楽しむための参考指標のひとつとしてご覧ください。
+            </p>
+        
+          </div>
+        
+        </section>
 
     </main>
 
