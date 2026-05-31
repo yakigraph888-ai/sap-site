@@ -368,6 +368,10 @@ export default function Home() {
         ※黄色背景は、143試合換算で沢村賞選考基準を達成している項目です。
       </p>
       
+      <p className="text-xs md:text-sm text-gray-400 mb-2">
+        ※黄色背景は、143試合換算で沢村賞選考基準を達成している項目です。
+      </p>
+      
       <div className="overflow-x-auto">
 
         <div className="overflow-x-auto rounded-xl border border-gray-700 shadow-2xl">
@@ -625,8 +629,16 @@ export default function Home() {
             </p>
               
             <p>
-              SAPは公式な指標ではなく、中の人（https://x.com/yakigraph）が
-              独自に算出している指標となっています。
+              SAPは公式な指標ではなく、中の人（Xアカウント：
+              <a
+                href="https://x.com/yakigraph"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sky-400 hover:text-sky-300 underline font-semibold"
+              >
+                @yakigraph
+              </a>
+              ）が独自に算出している指標となっています。
               あくまで、沢村賞レースを楽しむための参考指標のひとつとしてご覧ください。
             </p>
         
