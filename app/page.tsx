@@ -365,7 +365,6 @@ export default function Home() {
       {/* テーブル */}
       <p className="text-xs md:text-sm text-gray-400 mb-2">
         ※規定投球回到達者のみ
-        ※黄色背景は、143試合換算で沢村賞選考基準を達成している項目です。
       </p>
       
       <p className="text-xs md:text-sm text-gray-400 mb-2">
