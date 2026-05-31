@@ -365,6 +365,7 @@ export default function Home() {
       {/* テーブル */}
       <p className="text-xs md:text-sm text-gray-400 mb-2">
         ※規定投球回到達者のみ
+        ※黄色背景は、143試合換算で沢村賞選考基準を達成している項目です。
       </p>
       
       <div className="overflow-x-auto">
@@ -624,8 +625,9 @@ export default function Home() {
             </p>
               
             <p>
-              ただし、完璧な指標ではないため、
-              あくまで沢村賞レースを楽しむための参考指標のひとつとしてご覧ください。
+              SAPは公式な指標ではなく、中の人（https://x.com/yakigraph）が
+              独自に算出している指標となっています。
+              あくまで、沢村賞レースを楽しむための参考指標のひとつとしてご覧ください。
             </p>
         
           </div>
