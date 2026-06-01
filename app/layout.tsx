@@ -13,10 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "2026年沢村賞レース | SAP",
-    description:
-      "SAP（Sawamura Award Point）で見る2026年沢村賞レース",
-    };
+  title: "2026年沢村賞レース | SAP（Sawamura Award Point）",
+  description:
+    "独自指標SAP（Sawamura Award Point）で2026年沢村賞レースを予測。試合開催日に毎日自動更新し、各投手の沢村賞受賞可能性を掲載しています。",
+};
 
 export default function RootLayout({
   children,
