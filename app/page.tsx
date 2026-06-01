@@ -598,7 +598,7 @@ export default function Home() {
             </p>
         
             <p>
-              分析には主に以下の項目を使用しています。
+              ロジスティック回帰による分析の結果、SAPの算出には以下の項目を使用しています。
             </p>
         
             <ul className="list-disc pl-6 space-y-1 text-gray-300">
@@ -611,11 +611,7 @@ export default function Home() {
             </ul>
         
             <p>
-              SAPは
-              <span className="font-bold text-yellow-300 mx-1">
-                0〜1
-              </span>
-              の値を取り、
+              SAPは0〜1の値を取り、
               1に近いほど沢村賞受賞の可能性が高いことを表します。
             </p>
         
