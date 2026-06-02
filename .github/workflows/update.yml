@@ -2,14 +2,7 @@ name: Update NPB Stats
 
 on:
   schedule:
-    # JST 16:00〜25:00 を UTC に変換
-    # JST = UTC+9
-
-    # JST 16:00〜23:30
-    - cron: "0,30 7-14 * * *"
-
-    # JST 24:00〜25:00
-    - cron: "0,30 15 * * *"
+    - cron: "5,35 * * * *"
 
   workflow_dispatch:
 
@@ -21,6 +14,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Show execution time
+        run: |
+          echo "UTC=$(date -u)"
+          echo "JST=$(TZ=Asia/Tokyo date)"
+          
       - name: Checkout repository
         uses: actions/checkout@v4
 
