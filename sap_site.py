@@ -359,20 +359,45 @@ all_df = all_df.sort_values(
 ).reset_index(drop=True)
 
 # ==========================================
+# 旧JSON読込
+# ==========================================
+import os
+import json
+
+json_path = "public/npb_pitcher_stats_all.json"
+
+old_players = None
+old_updated_at = None
+
+if os.path.exists(json_path):
+    with open(json_path, "r", encoding="utf-8") as f:
+        old_json = json.load(f)
+
+    old_players = old_json.get("players")
+    old_updated_at = old_json.get("updated_at")
+
+# ==========================================
 # 更新日時取得
 # ==========================================
 from datetime import datetime
 
-updated_at = datetime.now().strftime(
-    "%Y-%m-%d %H:%M:%S"
-)
+new_players = all_df.to_dict(orient="records")
+
+if new_players != old_players:
+    updated_at = datetime.now().strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
+    print("データ更新あり")
+else:
+    updated_at = old_updated_at
+    print("データ更新なし")
 
 # ==========================================
 # JSON保存
 # ==========================================
 json_data = {
     "updated_at": updated_at,
-    "players": all_df.to_dict(orient="records")
+    "players": new_players
 }
 
 import json
